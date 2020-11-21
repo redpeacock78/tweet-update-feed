@@ -1,6 +1,6 @@
 on:
   rss:
-    url: https://hnrss.org/newest?points=300&count=3
+    url: https://script.google.com/macros/s/AKfycbx-WwG_YOQd5AycMbSYOAD-43Eoi_OM0HV4-tVkJ-eq9w-52Q/exec
 jobs:
   print:
     name: Print
