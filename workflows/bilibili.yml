@@ -3,7 +3,7 @@ on:
     url: https://rsshub.app/bilibili/fav/73658593/766374793
 jobs:
   tweet:
-    name: Tweet Liked Videos on Youtube
+    name: Tweet Liked Videos on Bilibili
     runs-on: ubuntu-latest
     steps:
       - uses: ethomson/send-tweet-action@v1
