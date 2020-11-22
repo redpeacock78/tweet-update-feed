@@ -14,11 +14,17 @@ jobs:
     name: New Tweet to Toot
     runs-on: ubuntu-latest
     steps:
+    　- uses: actions/cache@preview
+        id: cache
+        with:
+          path: ~/local/rubies
+          key: ruby-2.6.5
       - name: Setup ruby
         uses: clupprich/ruby-build-action@master
         id: ruby
         with:
           ruby-version: 2.6.5
+          cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
       - name: Print Ruby version
         run: ${{ steps.ruby.outputs.ruby-path }} --version
       - name: Tweet URI encode
