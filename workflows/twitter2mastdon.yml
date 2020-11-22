@@ -9,7 +9,6 @@ on:
     params:
       screen_name: kazuki_199778
       tweet_mode: "extended"
-      include_rts: true
 jobs:
   webhook:
     name: New Tweet to Toot
