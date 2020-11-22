@@ -2,10 +2,10 @@ on:
   twitter:
     api: statuses/user_timeline
     auth:
-      consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
-      consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
-      access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-      access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+      consumer_key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
+      consumer_secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
+      access_token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+      access_token_secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
     params:
       screen_name: kazuki_199778
       include_rts: true
