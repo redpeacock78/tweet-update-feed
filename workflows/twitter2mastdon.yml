@@ -20,7 +20,7 @@ jobs:
           apt install nkf
       - name: Tweet URI encode
         run: |
-          encode_text="$(echo ${{ on.twitter.outputs.full_text }} | nkf -WwMQ | sed '=$//g' | tr = % | tr -d '\\n')"
+          encode_text="$(echo ${{ on.twitter.outputs.full_text }} | nkf -WwMQ | sed 's/=$//g' | tr = % | tr -d '\\n')"
           echo "::set-output name=encoded_text::${encode_text}"
           echo ${encode_text}
         id: encode_tweet
