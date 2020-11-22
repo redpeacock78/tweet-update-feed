@@ -18,7 +18,7 @@ jobs:
       - name: Tweet URI encode
         id: encode_tweet
         run: |
-          encode_text=$(${{ steps.ruby.outputs.ruby-path }} -r cgi -e "puts CGI.escape(\""${{ on.twitter.outputs.full_text }}"\")")
+          encode_text=$(ruby -r cgi -e "puts CGI.escape(\""${{ on.twitter.outputs.full_text }}"\")")
           echo "::set-output name=encoded_text::${encode_text}"
           echo ${encode_text}
       - name: Tweet to Toot
