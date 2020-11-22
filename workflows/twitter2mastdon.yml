@@ -19,8 +19,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '15'
+        env:
+          tweet_text: ${{ on.twitter.outputs.full_text }}
         run: |
-          echo "::set-output name=encoded_text::$(node -e "console.log(encodeURIComponent(${{ on.twitter.output.full_text }}))")"
+          echo "::set-output name=encoded_text::$(node -e "console.log(encodeURIComponent($tweet_text))")"
       - name: Tweet to Toot
         uses: actionsflow/axios@v1
         with:
