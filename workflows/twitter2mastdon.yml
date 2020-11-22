@@ -1,0 +1,22 @@
+on:
+  twitter:
+    api: statuses/user_timeline
+    auth:
+      consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
+      consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
+      access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+      access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+    params:
+      screen_name: kazuki_199778
+      include_rts: true
+jobs:
+  webhook:
+    name: Tweet to Toot
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actionsflow/axios@v1
+        with:
+          url: https://mstdn.jp/api/v1/statuses
+          method: POST
+          content-type: application/x-www-form-urlencoded
+          data: "access_token=${{ secrets.MASTDON_ACCESS_TOKEN }}&status=${{ on.twitter.output.full_text }}&visibility=public"
