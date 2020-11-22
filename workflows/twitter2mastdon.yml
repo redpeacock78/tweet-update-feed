@@ -24,9 +24,9 @@ jobs:
         id: ruby
         with:
           ruby-version: 2.6.5
-          cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
+          cache-available: ${{ steps.ruby-cache.outputs.cache-hit == 'true' }}
       - name: Print ruby version
-        run: ${{ steps.ruby-cache.outputs.ruby-path }} --version
+        run: ${{ steps.ruby.outputs.ruby-path }} --version
       - name: Tweet URI encode
         id: encode_tweet
         run: |
