@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     　- uses: actions/cache@preview
-        id: cache
+        id: ruby-cache
         with:
           path: ~/local/rubies
           key: ruby-2.6.5
@@ -25,8 +25,8 @@ jobs:
         with:
           ruby-version: 2.6.5
           cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
-      - name: Print Ruby version
-        run: ${{ steps.ruby.outputs.ruby-path }} --version
+      - name: Print ruby version
+        run: ${{ steps.ruby-cache.outputs.ruby-path }} --version
       - name: Tweet URI encode
         id: encode_tweet
         run: |
