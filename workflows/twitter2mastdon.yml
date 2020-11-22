@@ -27,7 +27,6 @@ jobs:
           encode_text=$(${{ steps.ruby.outputs.ruby-path }} -r cgi -e "puts CGI.escape(\""${{ on.twitter.outputs.full_text }}"\")")
           echo "::set-output name=encoded_text::${encode_text}"
           echo ${encode_text}
-        id: encode_tweet
       - name: Tweet to Toot
         uses: actionsflow/axios@v1
         with:
