@@ -14,7 +14,7 @@ jobs:
     name: New Tweet to Toot
     runs-on: ubuntu-latest
     steps:
-    　- uses: actions/cache@preview
+      - uses: actions/cache@preview
         id: ruby-cache
         with:
           path: ~/local/rubies
