@@ -14,16 +14,16 @@ jobs:
     name: New Tweet to Toot
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: joerodrig/setup-ruby@v1
-        with:
-          ruby-version: 2.6
+      - name: Setup
+        run: |
+          apt update
+          apt install nkf
       - name: Tweet URI encode
         id: encode_tweet
         run: |
-          encode_text=$(ruby -r cgi -e "puts CGI.escape(\""${{ on.twitter.outputs.full_text }}"\")")
+          encode_text=$(echo "${{ on.twitter.outputs.full_text }}" | nkf -WwMQ | sed 's/=$//g' | tr = %)
+          encode_text="${encode_text//$'\n'/}"
           echo "::set-output name=encoded_text::${encode_text}"
-          echo ${encode_text}
       - name: Tweet to Toot
         uses: actionsflow/axios@v1
         with:
