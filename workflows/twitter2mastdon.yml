@@ -27,8 +27,6 @@ jobs:
           echo ${encode_text}
         id: encode_tweet
       - name: Tweet to Toot
-        env:
-          text: ${{ steps.encode_tweet.outputs.encoded_text }}
         uses: actionsflow/axios@v1
         with:
           url: https://mstdn.jp/api/v1/statuses
