@@ -11,12 +11,21 @@ on:
       include_rts: true
 jobs:
   webhook:
-    name: Tweet to Toot
+    name: New Tweet to Toot
+    id: encode_tweet
     runs-on: ubuntu-latest
     steps:
-      - uses: actionsflow/axios@v1
+      - name: Tweet URI encode
+        uses: actions/setup-node@v1
+        with:
+          node-version: '15'
+        run: |
+          encode-tweet=$(node -e "console.log(encodeURIComponent(${{ on.twitter.output.full_text }}))")
+          echo "::set-output name=encoded_text::${encode-tweet}"
+      - name: Tweet to Toot
+        uses: actionsflow/axios@v1
         with:
           url: https://mstdn.jp/api/v1/statuses
           method: POST
           content-type: application/x-www-form-urlencoded
-          data: "access_token=${{ secrets.MASTDON_ACCESS_TOKEN }}&status=${{ on.twitter.output.full_text }}&visibility=public"
+          data: "access_token=${{ secrets.MASTDON_ACCESS_TOKEN }}&status=${{ steps.encode_tweet.outputs.encoded_text }}&visibility=public"
