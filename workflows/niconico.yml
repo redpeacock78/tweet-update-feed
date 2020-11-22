@@ -1,6 +1,8 @@
 on:
   rss:
     url: http://www.nicovideo.jp/mylist/33014334/64875310?rss=2.0
+env:
+  message: "- ニコニコ動画 をマイリストに登録しました。"
 jobs:
   tweet:
     name: Tweet Liked Videos on Niconico
@@ -8,7 +10,7 @@ jobs:
     steps:
       - uses: ethomson/send-tweet-action@v1
         with:
-          status: "${{ on.rss.outputs.title }} '- ニコニコ動画 をマイリストに登録しました。${{ on.rss.outputs.link }} #ニコニコ動画"
+          status: "${{ on.rss.outputs.title }} ${message} ${{ on.rss.outputs.link }} #ニコニコ動画"
           consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
