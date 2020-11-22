@@ -24,7 +24,6 @@ jobs:
         run: |
           encode_text=$(echo $tweet_text | nkf -WwMQ | tr = %)
           echo "::set-output name=encoded_text::${encode_text}"
-          echo ${encode_text}
         id: encode_tweet
       - name: Tweet to Toot
         uses: actionsflow/axios@v1
