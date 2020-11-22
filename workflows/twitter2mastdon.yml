@@ -20,8 +20,7 @@ jobs:
         with:
           node-version: '15'
         run: |
-          encode-tweet=$(node -e "console.log(encodeURIComponent(${{ on.twitter.output.full_text }}))")
-          echo "::set-output name=encoded_text::${encode-tweet}"
+          echo "::set-output name=encoded_text::$(node -e "console.log(encodeURIComponent(${{ on.twitter.output.full_text }}))")"
       - name: Tweet to Toot
         uses: actionsflow/axios@v1
         with:
