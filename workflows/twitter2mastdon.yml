@@ -12,17 +12,19 @@ on:
 jobs:
   webhook:
     name: New Tweet to Toot
-    id: encode_tweet
     runs-on: ubuntu-latest
     steps:
       - name: Tweet URI encode
+        id: encode_tweet
         uses: actions/setup-node@v1
         with:
           node-version: '15'
         env:
           tweet_text: ${{ on.twitter.outputs.full_text }}
         run: |
-          echo "::set-output name=encoded_text::$(node -e "console.log(encodeURIComponent($tweet_text))")"
+          encode_text=$(node -e "console.log(encodeURIComponent($tweet_text))")
+          echo ::set-output name=encoded_text::${ encode_text }
+          echo ${ encode_text }
       - name: Tweet to Toot
         uses: actionsflow/axios@v1
         with:
