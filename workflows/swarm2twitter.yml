@@ -1,0 +1,18 @@
+on:
+  poll:
+    url: https://api.foursquare.com/v2/users/self/checkins?v=20201003
+    requestConfig:
+      headers:
+        Authorization: Basic ${{ secrets.SWARM_OAUTH_TOKEN }}
+jobs:
+  print:
+    name: Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Outputs
+        env:
+          title: ${{ on.poll.outputs.response.checkins.items.venue.name }}
+          body: ${{ on.poll.outputs.response.checkins.items.venue.location.formattedAddress }}
+        run: |
+          echo "title: $title"
+          echo "body: $body"
