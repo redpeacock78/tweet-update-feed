@@ -22,7 +22,6 @@ jobs:
         id: encode_tweet
         run: |
           encode_text=$(echo "${{ on.twitter.outputs.full_text }}" | while read -r line; do echo "${line}" | nkf -W8MQ | sed 's/=$//' | tr '=' '%' | paste -s -d '\0' - | sed -e 's/%7E/~/g' -e 's/%5F/_/g' -e 's/%2D/-/g' -e 's/%2E/./g'; done)
-          encode_text="${encode_text//$'\n'/}"
           echo "::set-output name=encoded_text::${encode_text}"
       - name: Tweet to Toot
         uses: actionsflow/axios@v1
