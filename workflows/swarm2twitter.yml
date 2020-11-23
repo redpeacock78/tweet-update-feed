@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: Print Outputs
         env:
-          title: ${{ on.poll.outputs.response.checkins.items.venue.name }}
-          body: ${{ on.poll.outputs.response.checkins.items.venue.location.formattedAddress }}
+          title: ${{ on.poll.outputs.venue.name }}
+          body: ${{ on.poll.outputs.venue.location.formattedAddress }}
         run: |
           echo "title: $title"
           echo "body: $body"
