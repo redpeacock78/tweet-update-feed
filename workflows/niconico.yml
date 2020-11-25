@@ -1,0 +1,15 @@
+on:
+  script:
+    path: ./scripts/nicinico_rss2json.js
+jobs:
+  print:
+    name: Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Outputs
+        env:
+          title: ${{on.script.outputs.channel.title}}
+          link: ${{on.script.outputs.channel.link}}
+        run: |
+          echo title: $title
+          echo title: $link
