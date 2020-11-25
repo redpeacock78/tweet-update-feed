@@ -1,6 +1,6 @@
 on:
   script:
-    path: ./scripts/nicinico_rss2json.js
+    path: ./scripts/niconico_rss2json.js
 jobs:
   print:
     name: Print
