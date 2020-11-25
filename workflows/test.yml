@@ -1,10 +1,8 @@
 on:
   script:
     run: |
-      const xml2json = require(`${{ github.workspace }}/lib/xml2json.js`);
       const xml = await helpers.axios.get("http://www.nicovideo.jp/mylist/33014334/64875310?rss=2.0");
-      const json = xml2json.parser(xml);
-      rerurn xml.channel;
+      rerurn xml;
 jobs:
   print:
     name: Print
@@ -12,8 +10,6 @@ jobs:
     steps:
       - name: Print Outputs
         env:
-          title: ${{on.script.outputs.title}}
-          link: ${{on.script.outputs.link}}
+          title: ${{on.script.outputs}}
         run: |
           echo title: $title
-          echo link: $link
