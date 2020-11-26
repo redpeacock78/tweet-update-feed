@@ -1,7 +1,7 @@
 on:
   script:
     run: |
-      const Parser = require('rss-parser');
+      const Parser = require(`${process.env.GITHUB_WORKSPACE}/node_modules/rss-parser/lib/parser.js`);
       const parser = new Parser();
       const result = await helpers.axios.get("http://www.nicovideo.jp/mylist/33014334/64875310?rss=2.0");
       const json = parser.parseString(result.data);
