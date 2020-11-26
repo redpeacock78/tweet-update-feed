@@ -13,7 +13,7 @@ jobs:
       - name: Generate text
         id: tweet_text
         env:
-          id: ${ {on.script.outputs.id }}
+          id: ${{ on.script.outputs.venue.id }}
           name: ${{ on.script.outputs.venue.name }}
           address: ${{ on.script.outputs.venue.location.formattedAddress[1] }}
           country: ${{ on.script.outputs.venue.location.country }}
