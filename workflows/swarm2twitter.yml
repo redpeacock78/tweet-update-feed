@@ -1,0 +1,27 @@
+on:
+  script:
+    run: |
+      const result = await helpers.axios.get("https://api.foursquare.com/v2/users/self/checkins?oauth_token=${{ secrets.SWARM_OAUTH_TOKEN }}&v=20201003");
+      return result.data.response.checkins.items
+    deduplicationKey: id
+
+jobs:
+  print:
+    name: New checkin location tweet
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate text
+        id: tweet_text
+        env:
+          id: ${ {on.script.outputs.id }}
+          name: ${{ on.script.outputs.venue.name }}
+          address: ${{ on.script.outputs.venue.location.formattedAddress[1] }}
+          country: ${{ on.script.outputs.venue.location.country }}
+        run: |
+          if [[ "${address}" != "" ]]; then
+            text=$(echo "I'm at ${name} in ${address} https://ja.foursquare.com/v/${id}")
+            echo "::set-output name=text::${text}"
+          else
+            text=$(echo "I'm at ${name} in ${country} https://ja.foursquare.com/v/${id}")
+            echo "::set-output name=text::${text}"
+          fi
