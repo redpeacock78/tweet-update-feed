@@ -1,0 +1,17 @@
+on:
+  poll:
+    url: https://api.foursquare.com/v2/users/self/checkins
+    requestConfig:
+      headers:
+        Authorization: Basic ${{ secrets.SWARM_OAUTH_TOKEN }}
+jobs:
+  print:
+    name: Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Outputs
+        env:
+          id: ${{ on.poll.outputs.venue.id }}
+          name: ${{ on.poll.outputs.venue.name }}
+        run: |
+          echo $id - $name
