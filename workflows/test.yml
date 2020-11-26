@@ -3,7 +3,7 @@ on:
     url: https://api.foursquare.com/v2/users/self/checkins
     requestConfig:
       headers:
-        Authorization: Basic ${{ secrets.SWARM_OAUTH_TOKEN }}
+        auth: oauth_token: ${{ secrets.SWARM_OAUTH_TOKEN }}
 jobs:
   print:
     name: Print
