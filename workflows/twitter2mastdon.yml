@@ -16,8 +16,8 @@ jobs:
     steps:
       - name: Setup
         run: |
-          apt update
-          apt install nkf
+          apt-get update
+          apt-get install nkf
       - name: Tweet URI encode
         id: encode_tweet
         run: |
