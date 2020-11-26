@@ -1,6 +1,9 @@
 on:
   poll:
     url: https://api.foursquare.com/v2/users/self/checkins?oauth_token=${{ secrets.SWARM_OAUTH_TOKEN }}&v=20201003
+    shouldIncludeBody: true
+    config:
+      limit: 5
 jobs:
   print:
     name: Print
@@ -8,7 +11,6 @@ jobs:
     steps:
       - name: Print Outputs
         env:
-          id: ${{ on.poll.outputs.venue.id }}
-          name: ${{ on.poll.outputs.venue.name }}
+          rawBody: ${{ toJSON(on.poll.outputs.raw__body) }}
         run: |
-          echo $id - $name
+          echo "rawBody: $rawBody"
