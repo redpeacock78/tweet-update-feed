@@ -1,0 +1,23 @@
+on:
+  script:
+    run: |
+      const key = "${{ secrets.RSS2JSON_API_KEY }}"";
+      const rss_url = "rss_url=http%3A%2F%2Fwww.nicovideo.jp%2Fmylist%2F33014334%2F64875310%3Frss%3D2.0";
+      const result = await helpers.axios.get(`https://api.rss2json.com/v1/api.json?api_key=${key}&rss_url=${rss_url}&count=20`);
+      return result.data;
+jobs:
+  tweet:
+    name: Tweet Liked Videos on Niconico
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate text
+        id: tweet_text
+        env:
+          title: ${{ on.script.outputs.title }}
+          link: ${{ on.script.outputs.link }}
+        run: |
+          tag=$(echo "${{ on.script.outputs.link }}" | sed -e "s|http://www.nicovideo.jp/watch/|#|" -e "s|?ref=rss_mylist_rss2||")
+          fix_link=$(echo "${{ on.script.outputs.link }}" | sed -e "s/?ref=rss_mylist_rss2//")
+          text=$(echo "${title} - ニコニコ動画 をマイリストに登録しました。 ${fix_link} #ニコニコ動画 ${tag}")
+          echo "::set-output name=text::${text}"
+          echo $text
