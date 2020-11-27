@@ -17,8 +17,8 @@ jobs:
           title: ${{ on.script.outputs.title }}
           link: ${{ on.script.outputs.link }}
         run: |
-          tag=$(echo "${{ on.script.outputs.link }}" | sed -e "s|http://www.nicovideo.jp/watch/|#|" -e "s|?ref=rss_mylist_rss2||")
-          fix_link=$(echo "${{ on.script.outputs.link }}" | sed -e "s/?ref=rss_mylist_rss2//")
+          tag=$(echo "${link}" | sed -e "s|http://www.nicovideo.jp/watch/|#|" -e "s|?ref=rss_mylist_rss2||")
+          fix_link=$(echo "${link}" | sed -e "s/?ref=rss_mylist_rss2//")
           text=$(echo "${title} - ニコニコ動画 をマイリストに登録しました。 ${fix_link} ${tag} #ニコニコ動画")
           echo "::set-output name=text::${text}"
       - name: Text tweet
