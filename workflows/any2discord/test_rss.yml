@@ -13,6 +13,6 @@ jobs:
       - name: Post text
         env:
           DISCORD_WEBHOOK: ${{ secrets.TEST_WEBHOOK }}
-        uses: Ilshidur/action-discord@@8135f7f
+        uses: Ilshidur/action-discord@master
         with:
           args: "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
