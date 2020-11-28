@@ -3,11 +3,11 @@ on:
     # qiita trend
     url: https://qiita.com/popular-items/feed.atom
 jobs:
-  tweet:
+  post:
     name: Post RSS updates to the discord
     runs-on: ubuntu-latest
     steps:
-      - name: Generate date
+      - name: Fix date format
         id: date
         run: |
           fix_date=$(date -d ${{ on.rss.outputs.pubDate }} "+%B %d, %Y at %I:%M%p")
