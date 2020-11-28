@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print
-          run: |
-            echo "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
+        run: |
+          echo "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
       - name: Post text
         env:
           DISCORD_WEBHOOK: ${{ secrets.TEST_WEBHOOK }}
