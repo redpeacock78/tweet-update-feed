@@ -18,3 +18,4 @@ jobs:
                -H  "Content-Type: application/json" \
                -d '{"content": "**${{ on.rss.outputs.title }}** - ${{ steps.date.outputs.fix_date }} ${{ on.rss.outputs.link }}"}' \
                ${{ secrets.DISCORD_TECH_QIITA_QIITA_TREND }}
+          sleep 5
