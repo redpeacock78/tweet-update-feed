@@ -3,17 +3,13 @@ on:
     # 2.5次元の誘惑
     url: https://shonenjumpplus.com/rss/series/10834108156661135927
 jobs:
-  tweet:
+  post:
     name: Post RSS updates to the discord
     runs-on: ubuntu-latest
     steps:
-      - name: Generate text
-        uses: actionsflow/axios@v1
-        env:
-          title: ${{ on.rss.outputs.title }}
-          link: ${{ on.rss.outputs.link }}
-        with:
-          url: ${{ secrets.DISCORD_PRIVATE_MANGA_JUMP_PLUS }}
-          method: POST
-          content-type: application/json
-          data: '{ "content" : "${title} ${link}" }'
+      - name: Post
+        run: |
+          curl -X POST \
+               -H  "Content-Type: application/json" \
+               -d '{"content": "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"}' \
+               ${{ secrets.DISCORD_PRIVATE_MANGA_JUMP_PLUS }}
