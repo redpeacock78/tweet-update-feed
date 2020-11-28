@@ -1,0 +1,18 @@
+on:
+  rss:
+    # 2.5次元の誘惑
+    url: https://shonenjumpplus.com/rss/series/10834108156661135927
+jobs:
+  tweet:
+    name: Post RSS updates to the discord
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print
+          run: |
+            echo "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
+      - name: Post text
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.TEST_WEBHOOK }}
+        uses: Ilshidur/action-discord@@8135f7f
+        with:
+          args: "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
