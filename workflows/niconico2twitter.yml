@@ -17,9 +17,10 @@ jobs:
           title: ${{ on.script.outputs.title }}
           link: ${{ on.script.outputs.link }}
         run: |
-          tag=$(echo "${link}" | sed -e "s|http://www.nicovideo.jp/watch/|#|" -e "s|?ref=rss_mylist_rss2||")
+          fix_title=$(echo "${title}" | sed -e "s/&amp;/\&/g" | sed -e "s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g")
           fix_link=$(echo "${link}" | sed -e "s/?ref=rss_mylist_rss2//")
-          text=$(echo "${title} - ニコニコ動画 をマイリストに登録しました。 ${fix_link} ${tag} #ニコニコ動画")
+          tag=$(echo "${link}" | sed -e "s|http://www.nicovideo.jp/watch/|#|" -e "s|?ref=rss_mylist_rss2||")
+          text=$(echo "${fix_title} - ニコニコ動画 をマイリストに登録しました。 ${fix_link} ${tag} #ニコニコ動画")
           echo "::set-output name=text::${text}"
       - name: Text tweet
         uses: ethomson/send-tweet-action@v1
