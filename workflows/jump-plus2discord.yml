@@ -13,4 +13,7 @@ jobs:
       - name: Post
         run: |
           echo "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
-          
+          curl -X POST \
+               -H  "Content-Type: application/json" \
+               -d '{"content": "**${{ on.rss.outputs.title }}** ${{ on.rss.outputs.link }}"}' \
+               ${{ secrets.DISCORD_PRIVATE_MANGA_JUMP_PLUS }}
