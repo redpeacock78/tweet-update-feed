@@ -5,6 +5,8 @@ on:
       - https://shonenjumpplus.com/rss/series/10834108156661135927
       # 怪獣8号
       - https://shonenjumpplus.com/rss/series/13933686331674116114
+      # ゲーミングお嬢様
+      - https://shonenjumpplus.com/rss/series/13933686331681118994
 jobs:
   post:
     name: Post RSS updates to the discord
@@ -13,7 +15,3 @@ jobs:
       - name: Post
         run: |
           echo "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
-          curl -X POST \
-               -H  "Content-Type: application/json" \
-               -d '{"content": "**${{ on.rss.outputs.title }}** ${{ on.rss.outputs.link }}"}' \
-               ${{ secrets.DISCORD_PRIVATE_MANGA_JUMP_PLUS }}
