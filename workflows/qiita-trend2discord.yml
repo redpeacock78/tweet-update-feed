@@ -1,0 +1,15 @@
+on:
+  rss:
+    # qiita trend
+    url: https://qiita.com/popular-items/feed.atom
+jobs:
+  post:
+    name: Post RSS updates to the discord
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fix date format
+        id: date
+        run: |
+          fix_date=$(date -d ${{ on.rss.outputs.pubDate }} "+%B %d, %Y at %I:%M%p")
+          echo "${{ on.rss.outputs.title }} - ${fix_date} ${{ on.rss.outputs.link }}"
+          echo "::set-output name=fix_date::${fix_date}"
