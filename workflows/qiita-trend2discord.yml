@@ -11,5 +11,12 @@ jobs:
         id: date
         run: |
           fix_date=$(date -d ${{ on.rss.outputs.pubDate }} "+%B %d, %Y at %I:%M%p")
-          echo "${{ on.rss.outputs.title }} - ${fix_date} ${{ on.rss.outputs.link }}"
           echo "::set-output name=fix_date::${fix_date}"
+      - name: Post
+        run: |
+          echo "${{ on.rss.outputs.title }} - ${{ steps.date.outputs.fix_date }} ${{ on.rss.outputs.link }}"
+          curl -X POST \
+               -H  "Content-Type: application/json" \
+               -d '{"content": "**${{ on.rss.outputs.title }}** - ${{ steps.date.outputs.fix_date }} ${{ on.rss.outputs.link }}"}' \
+               ${{ secrets.DISCORD_TECH_QIITA_QIITA_TREND }}
+          sleep 5
