@@ -22,7 +22,7 @@ jobs:
             echo "::set-output name=text::${text}"
           else
             address=$(echo "${{ on.script.outputs.venue.location.country }}")
-            text=$(echo "I'm at ${name} in ${country} https://ja.foursquare.com/v/${id}")
+            text=$(echo "I'm at ${name} in ${address} https://ja.foursquare.com/v/${id}")
             echo "::set-output name=text::${text}"
           fi
       - name: Text tweet
