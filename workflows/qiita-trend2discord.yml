@@ -15,7 +15,7 @@ jobs:
       - name: Fix title
         id: title
         run: |
-          fix_title=$(echo "${{ on.rss.outputs.title }}" | sed -e 's/*/\\\\*/g;s/_/\\\\_/g;s/~~/\\\\~~/g')
+          fix_title=$(echo "${{ on.rss.outputs.title }}" | sed -e "s/&amp;/\&/g" | sed -e "s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g" | sed -e 's/*/\\\\*/g;s/_/\\\\_/g;s/~~/\\\\~~/g')
           echo "::set-output name=fix_title::${fix_title}"
       - name: Post
         run: |
