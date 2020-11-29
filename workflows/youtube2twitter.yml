@@ -9,8 +9,8 @@ jobs:
       - name: Generate text
         id: tweet_text
         env:
-          title: ${{ on.script.outputs.title }}
-          link: ${{ on.script.outputs.link }}
+          title: ${{ on.rss.outputs.title }}
+          link: ${{ on.rss.outputs.link }}
         run: |
           fix_title=$(echo "${title}" | sed -e "s/&amp;/\&/g" | sed -e "s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g")
           text=$(echo "Liked on YouTube: ${fix_title} ${link}")
