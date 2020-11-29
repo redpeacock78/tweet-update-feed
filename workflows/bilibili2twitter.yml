@@ -6,9 +6,18 @@ jobs:
     name: Tweet Liked Videos on Bilibili
     runs-on: ubuntu-latest
     steps:
+      - name: Generate text
+        id: tweet_text
+        env:
+          title: ${{ on.rss.outputs.title }}
+          link: ${{ on.rss.outputs.link }}
+        run: |
+          fix_title=$(echo "${title}" | sed -e "s/&amp;/\&/g" | sed -e "s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g")
+          text=$(echo "在哔哩哔哩赞过: ${fix_title} ${link} #bilibili #哔哩哔哩 #ビリビリ動画")
+          echo "::set-output name=text::${text}"
       - uses: ethomson/send-tweet-action@v1
         with:
-          status: "在哔哩哔哩赞过: ${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }} #bilibili #哔哩哔哩 #ビリビリ動画"
+          status: "${{ stepa.tweet_text.outputs.text }}"
           consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
