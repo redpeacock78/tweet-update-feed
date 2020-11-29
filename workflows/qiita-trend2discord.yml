@@ -12,11 +12,16 @@ jobs:
         run: |
           fix_date=$(date -d ${{ on.rss.outputs.pubDate }} "+%B %d, %Y at %I:%M%p")
           echo "::set-output name=fix_date::${fix_date}"
+      - name: Fix title
+        id: title
+        run: |
+          fix_title=$(echo "${{ on.rss.outputs.title }}" | sed -e 's/*/\\\\*/g;s/_/\\\\_/g;s/~~/\\\\~~/g')
+          echo "::set-output name=fix_title::${fix_title}"
       - name: Post
         run: |
-          echo "${{ on.rss.outputs.title }} - ${{ steps.date.outputs.fix_date }} ${{ on.rss.outputs.link }}"
+          echo "${{ steps.title.outputs.fix_title }} - ${{ steps.date.outputs.fix_date }} ${{ on.rss.outputs.link }}"
           curl -X POST \
                -H  "Content-Type: application/json" \
-               -d '{"content": "**${{ on.rss.outputs.title }}** - ${{ steps.date.outputs.fix_date }} ${{ on.rss.outputs.link }}"}' \
+               -d '{"content": "**${{ steps.title.outputs.fix_title }}** - ${{ steps.date.outputs.fix_date }} ${{ on.rss.outputs.link }}"}' \
                ${{ secrets.DISCORD_TECH_QIITA_QIITA_TREND }}
           sleep 5
