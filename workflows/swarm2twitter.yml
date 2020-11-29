@@ -15,13 +15,13 @@ jobs:
         env:
           id: ${{ on.script.outputs.venue.id }}
           name: ${{ on.script.outputs.venue.name }}
-          address: ${{ on.script.outputs.venue.location.formattedAddress[1] }}
-          country: ${{ on.script.outputs.venue.location.country }}
         run: |
-          if [[ "${address}" != "" ]]; then
+          if [[ "${{ on.script.outputs.venue.location.formattedAddress[1] }}" != "" ]]; then
+            address=$(echo "${{ on.script.outputs.venue.location.formattedAddress[1] }}")
             text=$(echo "I'm at ${name} in ${address} https://ja.foursquare.com/v/${id}")
             echo "::set-output name=text::${text}"
           else
+            address=$(echo "${{ on.script.outputs.venue.location.country }}")
             text=$(echo "I'm at ${name} in ${country} https://ja.foursquare.com/v/${id}")
             echo "::set-output name=text::${text}"
           fi
