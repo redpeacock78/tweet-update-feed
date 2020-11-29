@@ -12,10 +12,15 @@ jobs:
     name: Post RSS updates to the discord
     runs-on: ubuntu-latest
     steps:
+      - name: Fix title
+        id: title
+        run: |
+          fix_title=$(echo "${{ on.rss.outputs.title }}" | sed -e "s/&amp;/\&/g" | sed -e "s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g" | sed -e 's/*/\\\\*/g;s/_/\\\\_/g;s/~~/\\\\~~/g')
+          echo "::set-output name=fix_title::${fix_title}"
       - name: Post
         run: |
           echo "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
           curl -X POST \
                -H  "Content-Type: application/json" \
-               -d '{"content": "**${{ on.rss.outputs.title }}** ${{ on.rss.outputs.link }}"}' \
+               -d '{"content": "**${{ steps.title.outputs.fix_title }}** ${{ on.rss.outputs.link }}"}' \
                ${{ secrets.DISCORD_PRIVATE_MANGA_JUMP_PLUS }}
