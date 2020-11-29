@@ -1,0 +1,12 @@
+on:
+  rss:
+    # 2.5次元の誘惑
+    url: https://shonenjumpplus.com/rss/series/10834108156661135927
+jobs:
+  post:
+    name: Post RSS updates to the discord
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post
+        run: |
+          echo "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
