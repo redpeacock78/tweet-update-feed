@@ -19,7 +19,7 @@ jobs:
           echo "::set-output name=fix_title::${fix_title}"
       - name: Post
         run: |
-          echo "${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
+          echo "${{ steps.title.outputs.fix_title }} ${{ on.rss.outputs.link }}"
           curl -X POST \
                -H  "Content-Type: application/json" \
                -d '{"content": "**${{ steps.title.outputs.fix_title }}** ${{ on.rss.outputs.link }}"}' \
