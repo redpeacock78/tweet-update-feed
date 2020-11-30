@@ -1,0 +1,11 @@
+on:
+  rss:
+    url: https://rsshub.app/pixiv/user/bookmarks/17863909
+jobs:
+  post:
+    name: Tweet new bookmark illustlation on Pixiv
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post
+        run: |
+          echo "${{ on.rss.outputs.title }} | ${{ on.rss.outputs.author }} #pixiv ${{ on.rss.outputs.link }}"
