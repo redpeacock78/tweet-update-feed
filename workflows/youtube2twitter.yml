@@ -8,16 +8,12 @@ jobs:
     steps:
       - name: Generate text
         id: tweet_text
-        env:
-          title: ${{ on.rss.outputs.title }}
-          link: ${{ on.rss.outputs.link }}
         run: |
-          fix_title=$(echo "${title}" | sed -e "s/&amp;/\&/g;s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g")
-          text=$(echo "Liked on YouTube: ${fix_title} ${link}")
-          echo "::set-output name=text::${text}"
+          fix_title=$(echo '${{ on.rss.outputs.title }}' | sed -e "s/&amp;/\&/g;s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g")
+          echo "::set-output name=text::${fix_title}"
       - uses: ethomson/send-tweet-action@v1
         with:
-          status: "${{ steps.tweet_text.outputs.text }}"
+          status: "Liked on YouTube: ${{ steps.tweet_text.outputs.fix_title }} ${{ on.rss.outputs.link }}"
           consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
