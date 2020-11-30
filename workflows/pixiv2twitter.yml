@@ -6,15 +6,10 @@ jobs:
     name: Tweet new bookmark illustlation on Pixiv
     runs-on: ubuntu-latest
     steps:
-      - name: Generate text
-        id: tweet_text
-        run: |
-          fix_title=$(echo '${{ on.rss.outputs.title }}' | sed -e "s/&amp;/\&/g;s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g")
-          echo "::set-output name=text::${fix_title}"
       - name: Tweet
         uses: ethomson/send-tweet-action@v1
         with:
-          status: "Bookmarked on Pixiv: ${{ steps.tweet_text.outputs.fix_title }} | ${{ on.rss.outputs.author }} #pixiv ${{ on.rss.outputs.link }}"
+          status: "Bookmarked on Pixiv: ${{ on.rss.outputs.title }} | ${{ on.rss.outputs.author }} #pixiv ${{ on.rss.outputs.link }}"
           consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
