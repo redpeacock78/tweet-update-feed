@@ -5,6 +5,9 @@ on:
       method: GET
       headers:
         Authorization: Bearer ${{ secrets.QIITA_API_KEY }}
+    config:
+      sort:
+        id: -1
 jobs:
   tweet:
     name: Tweet new stock on Qiita
