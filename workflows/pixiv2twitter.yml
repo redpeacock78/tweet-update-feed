@@ -1,6 +1,9 @@
 on:
   rss:
     url: https://rsshub.app/pixiv/user/bookmarks/17863909
+    config:
+      sort:
+        id: -1
 jobs:
   post:
     name: Tweet new bookmark illustlation on Pixiv
