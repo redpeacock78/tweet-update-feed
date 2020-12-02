@@ -16,4 +16,4 @@ jobs:
     steps:
       - name: Tweet
         run: |
-          echo ${{ on.scripts.outputs.title }} ${{ on.scripts.outputs.link }}
+          echo '${{ on.scripts.outputs.title }} ${{ on.scripts.outputs.link }}'
