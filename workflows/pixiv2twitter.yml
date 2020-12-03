@@ -3,7 +3,7 @@ on:
     run: |
       const key = "${{ secrets.RSS2JSON_API_KEY }}";
       const rss_url = "https%3A%2F%2Frsshub.app%2Fpixiv%2Fuser%2Fbookmarks%2F17863909";
-      const result = await helpers.axios.get(`https://api.rss2json.com/v1/api.json?api_key=${key}&rss_url=${rss_url}&count=20`);
+      const result = await helpers.axios.get(`https://api.rss2json.com/v1/api.json?api_key=${key}&rss_url=${rss_url}&count=30`);
       return result.data;
     deduplicationKey: link
     config:
