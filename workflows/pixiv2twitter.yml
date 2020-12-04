@@ -1,24 +1,20 @@
-#on:
-#  script:
-#    run: |
-#      const key = "${{ secrets.RSS2JSON_API_KEY }}";
-#      const rss_url = "https%3A%2F%2Frsshub.app%2Fpixiv%2Fuser%2Fbookmarks%2F17863909";
-#      const result = await helpers.axios.get(`https://api.rss2json.com/v1/api.json?api_key=${key}&rss_url=${rss_url}&count=30`);
-#      return result.data;
-#    deduplicationKey: link
-#    config:
-#      sort:
-#        id: -1
-#jobs:
-#  post:
-#    name: Tweet new bookmark illustlation on Pixiv
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Tweet
-#        uses: ethomson/send-tweet-action@v1
-#        with:
-#          status: "Bookmarked on Pixiv: ${{ on.script.outputs.title }} | ${{ on.script.outputs.author }} #pixiv ${{ on.script.outputs.link }}"
-#          consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
-#          consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
-#          access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-#          access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+on:
+  script:
+    run: |
+      const key = "${{ secrets.RSS2JSON_API_KEY }}";
+      const rss_url = "https%3A%2F%2Frsshub.app%2Fpixiv%2Fuser%2Fbookmarks%2F17863909";
+      const result = await helpers.axios.get(`https://api.rss2json.com/v1/api.json?api_key=${key}&rss_url=${rss_url}&count=30`);
+      return result.data;
+    deduplicationKey: link
+    config:
+      skipOnError: true
+      sort:
+        id: -1
+jobs:
+  post:
+    name: Tweet new bookmark illustlation on Pixiv
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tweet
+        run: | 
+          echo "Bookmarked on Pixiv: ${{ on.script.outputs.title }} | ${{ on.script.outputs.author }} #pixiv ${{ on.script.outputs.link }}"
