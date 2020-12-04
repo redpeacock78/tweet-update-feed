@@ -2,8 +2,7 @@ on:
   rss:
     url: https://script.google.com/macros/s/AKfycbx-WwG_YOQd5AycMbSYOAD-43Eoi_OM0HV4-tVkJ-eq9w-52Q/exec
     config:
-      sort:
-        id: -1
+      skipOnError: true
 jobs:
   tweet:
     name: Tweet Liked Videos on Youtube
