@@ -1,6 +1,5 @@
 on:
   rss:
-    # qiita trend
     url: https://qiita.com/popular-items/feed.atom
 jobs:
   post:
