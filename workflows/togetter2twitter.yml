@@ -1,9 +1,6 @@
 on:
   rss:
     url: https://feed43.com/my-toggeter-favorites-item.xml
-    config:
-      sort:
-        id: -1
 jobs:
   tweet:
     name: Tweet new favorite on Toggeter
