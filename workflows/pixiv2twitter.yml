@@ -1,6 +1,6 @@
 on:
   rsshub:
-    path: /pixiv%/user/bookmarks/17863909
+    path: /pixiv/user/bookmarks/17863909
   config:
     limit: 30
 jobs:
