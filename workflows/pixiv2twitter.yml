@@ -8,8 +8,6 @@ on:
     deduplicationKey: link
     config:
       skipOnError: true
-      sort:
-        id: -1
 jobs:
   tweet:
     name: Tweet new bookmark illustlation on Pixiv
