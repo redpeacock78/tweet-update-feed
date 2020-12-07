@@ -17,18 +17,14 @@ jobs:
     name: New Tweet to Toot
     runs-on: ubuntu-latest
     steps:
-      - name: Setup
-        run: |
-          apt-get update >/dev/null
-          apt-get install vim -y >/dev/null
       - name: Tweet URI encode
         id: encode_tweet
         run: |
           if $(echo '${{ on.twitter.outputs.full_text }}' | sed -n 1p | grep -q "^RT @.*: "); then
-            encode_text=$(echo 'RT @${{ on.twitter.outputs.retweeted_status.user.screen_name }}: ${{ on.twitter.outputs.retweeted_status.full_text }}' | while read -r line; do echo "${line}" | sed "s/&amp;/\&/g" | xxd -p -u | sed 's/\(..\)/%\1/g' | paste -s -d '\0' -; done)
+            encode_text=$(echo 'RT @${{ on.twitter.outputs.retweeted_status.user.screen_name }}: ${{ on.twitter.outputs.retweeted_status.full_text }}' | while read -r line; do echo "${line}" | sed "s/&amp;/\&/g" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print $0}' | paste -s -d '\0' -; done)
             echo "::set-output name=encoded_text::${encode_text//$'\n'/}"
           else
-            encode_text=$(echo '${{ on.twitter.outputs.full_text }}' | while read -r line; do echo "${line}" | sed "s/&amp;/\&/g" | xxd -p -u | sed 's/\(..\)/%\1/g' | paste -s -d '\0' -; done)
+            encode_text=$(echo '${{ on.twitter.outputs.full_text }}' | while read -r line; do echo "${line}" | sed "s/&amp;/\&/g" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print $0}' | paste -s -d '\0' -; done)
             echo "::set-output name=encoded_text::${encode_text//$'\n'/}"
           fi
       - name: Tweet to Toot
