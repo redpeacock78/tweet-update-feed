@@ -21,10 +21,12 @@ jobs:
         id: encode_tweet
         run: |
           if $(echo '${{ on.twitter.outputs.full_text }}' | sed -n 1p | grep -q "^RT @.*: "); then
-            encode_text=$(echo 'RT @${{ on.twitter.outputs.retweeted_status.user.screen_name }}: ${{ on.twitter.outputs.retweeted_status.full_text }}' | while read -r line; do echo "${line}" | sed "s/&amp;/\&/g" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print toupper($0)}'; done)
+            text=$(echo 'RT @${{ on.twitter.outputs.retweeted_status.user.screen_name }}: ${{ on.twitter.outputs.retweeted_status.full_text }}')
+            encode_text=$(sed "s/&amp;/\&/g" <<<"${text}" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print toupper($0)}')
             echo "::set-output name=encoded_text::${encode_text}"
           else
-            encode_text=$(echo '${{ on.twitter.outputs.full_text }}' | while read -r line; do echo "${line}" | sed "s/&amp;/\&/g" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print toupper($0)}'; done)
+            text=$(echo '${{ on.twitter.outputs.full_text }}')
+            encode_text=$(sed "s/&amp;/\&/g" <<<"${text}" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print toupper($0)}')
             echo "::set-output name=encoded_text::${encode_text}"
           fi
       - name: Tweet to Toot
