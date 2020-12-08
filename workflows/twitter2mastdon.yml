@@ -20,13 +20,12 @@ jobs:
       - name: Tweet URI encode
         id: encode_tweet
         run: |
+          function url-encode(){sed "s/&amp;/\&/g" <<<"${@}" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print toupper($0)}'}
           if [[ "${{ on.twitter.outputs.retweeted_status.full_text }}" != "" ]]; then
-            text=$(echo 'RT @${{ on.twitter.outputs.retweeted_status.user.screen_name }}: ${{ on.twitter.outputs.retweeted_status.full_text }}')
-            encode_text=$(sed "s/&amp;/\&/g" <<<"${text}" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print toupper($0)}')
+            encode_text=$(url-encode 'RT @${{ on.twitter.outputs.retweeted_status.user.screen_name }}: ${{ on.twitter.outputs.retweeted_status.full_text }}')
             echo "::set-output name=encoded_text::${encode_text}"
           else
-            text=$(echo '${{ on.twitter.outputs.full_text }}')
-            encode_text=$(sed "s/&amp;/\&/g" <<<"${text}" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print toupper($0)}')
+            encode_text=$(url-encode '${{ on.twitter.outputs.full_text }}')
             echo "::set-output name=encoded_text::${encode_text}"
           fi
       - name: Tweet to Toot
