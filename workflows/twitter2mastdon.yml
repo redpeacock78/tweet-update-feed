@@ -18,7 +18,7 @@ on:
           return item;
         } else {
           item.retweeted_status.full_text = item.retweeted_status.full_text.replace(/'/g, "'\\''");
-          return item
+          return item;
         }
 jobs:
   webhook:
