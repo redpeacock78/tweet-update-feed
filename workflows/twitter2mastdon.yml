@@ -12,6 +12,14 @@ on:
     config:
       sort:
         id: 1
+      format: |
+        if (!item.retweeted_status) {
+          item.full_text = item.full_text.replace(/'/g, "'\\''");
+          return item;
+        } else {
+          item.retweeted_status.full_text = item.retweeted_status.full_text.replace(/'/g, "'\\''");
+          return item
+        }
 jobs:
   webhook:
     name: New Tweet to Toot
