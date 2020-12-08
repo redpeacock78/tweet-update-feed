@@ -20,7 +20,7 @@ jobs:
       - name: Tweet URI encode
         id: encode_tweet
         run: |
-          if $(echo '${{ on.twitter.outputs.full_text }}' | sed -n 1p | grep -q "^RT @.*: "); then
+          if [[ "${{ on.twitter.outputs.retweeted_status.full_text }}" != "" ]]; then
             text=$(echo 'RT @${{ on.twitter.outputs.retweeted_status.user.screen_name }}: ${{ on.twitter.outputs.retweeted_status.full_text }}')
             encode_text=$(sed "s/&amp;/\&/g" <<<"${text}" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print toupper($0)}')
             echo "::set-output name=encoded_text::${encode_text}"
