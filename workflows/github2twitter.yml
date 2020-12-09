@@ -5,7 +5,7 @@ on:
       method: GET
 jobs:
   tweet:
-    name: Tweet new stock on Qiita
+    name: Tweet new Starred Repos in Github
     runs-on: ubuntu-latest
     steps:
       - name: Text tweet
