@@ -1,0 +1,13 @@
+on:
+  poll:
+    url: https://api.github.com/users/redpeacock78/starred?page=1&per_page=20
+    requestConfig:
+      method: GET
+jobs:
+  tweet:
+    name: Tweet new stock on Qiita
+    runs-on: ubuntu-latest
+    steps:
+      - name: Text tweet
+        run: |
+          echo "Starred Repo on Github: ${{ on.poll.outputs.full_name }} ${{ on.poll.outputs.html_url }}"
