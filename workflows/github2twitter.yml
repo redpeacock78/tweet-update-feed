@@ -11,7 +11,7 @@ jobs:
       - name: Text tweet
         uses: ethomson/send-tweet-action@v1
         with:
-          status: "Starred Repo on Github: ${{ on.poll.outputs.full_name }} ${{ on.poll.outputs.html_url }}"
+          status: "Starred Repos in Github: ${{ on.poll.outputs.full_name }} ${{ on.poll.outputs.html_url }}"
           consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
