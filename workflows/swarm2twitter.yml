@@ -4,10 +4,6 @@ on:
       const result = await helpers.axios.get("https://api.foursquare.com/v2/users/self/checkins?oauth_token=${{ secrets.SWARM_OAUTH_TOKEN }}&v=20201003");
       return result.data.response.checkins.items
     deduplicationKey: id
-    config:
-      sort:
-        id: -1
-
 jobs:
   print:
     name: New checkin location tweet
