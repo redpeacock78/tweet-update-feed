@@ -7,6 +7,10 @@ on:
       - https://shonenjumpplus.com/rss/series/13933686331674116114
       # ゲーミングお嬢様
       - https://shonenjumpplus.com/rss/series/13933686331681118994
+      # デッドプール：SAMURAI
+      - https://shonenjumpplus.com/rss/series/13933686331761415050
+      # デビィ・ザ・コルシファは負けず嫌い
+      - https://shonenjumpplus.com/rss/series/13933686331756948776
 jobs:
   post:
     name: Post RSS updates to the discord
