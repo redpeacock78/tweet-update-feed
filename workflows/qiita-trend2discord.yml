@@ -15,8 +15,8 @@ jobs:
           echo "::set-output name=title::${fix_title}"
       - name: Post
         run: |
-          echo "${{ steps.title.outputs.fix_title }} - ${{ steps.date.outputs.fix_date }} ${{ on.rss.outputs.link }}"
-          curl -X POST \
+          curl -s \
+               -X POST \
                -H  "Content-Type: application/json" \
                -d '{"content": "**${{ steps.fix.outputs.title }}** - ${{ steps.fix.outputs.date }} ${{ on.rss.outputs.link }}"}' \
                ${{ secrets.DISCORD_TECH_QIITA_QIITA_TREND }}
