@@ -14,10 +14,16 @@ on:
         id: 1
       format: |
         if (!item.retweeted_status) {
-          item.full_text = item.full_text.replace(/'/g, "'\\''");
+          item.full_text = item.full_text.replace(/'/g, "'\\''")
+            .replace(/&amp;/g, "&")
+            .replace(/&lt;/g, "<")
+            .replace(/&gt;/g, ">");
           return item;
         } else {
-          item.retweeted_status.full_text = item.retweeted_status.full_text.replace(/'/g, "'\\''");
+          item.retweeted_status.full_text = item.retweeted_status.full_text.replace(/'/g, "'\\''")
+            .replace(/&amp;/g, "&")
+            .replace(/&lt;/g, "<")
+            .replace(/&gt;/g, ">");
           return item;
         }
 jobs:
@@ -28,7 +34,7 @@ jobs:
       - name: Tweet URI encode
         id: encode_tweet
         run: |
-          function url-encode(){ sed "s/&amp;/\&/g" <<<"${@}" | od -An -vtx1 | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print toupper($0)}'; }
+          function url-encode(){ od -An -vtx1 <<<"${@}" | awk 'BEGIN{ORS=""}{gsub(" ", "%", $0);print toupper($0)}'; }
           if [[ "${{ on.twitter.outputs.retweeted_status.full_text }}" != "" ]]; then
             text='RT @${{ on.twitter.outputs.retweeted_status.user.screen_name }}: ${{ on.twitter.outputs.retweeted_status.full_text }}'
             encode_text=$(url-encode "${text}")
