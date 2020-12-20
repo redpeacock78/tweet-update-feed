@@ -1,0 +1,18 @@
+on:
+  rss:
+    url: |
+      https://rsshub-dun-zeta.vercel.app/bilibili/user/bangumi/73658593
+    config:
+      skipOnError: true
+jobs:
+  post:
+    name: Notify Discord of new shows on Bilibili
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ext data
+        id: ext
+        run: |
+          description=$(sed "s/<br>.*//g" <<<'${{ on.rss.outputs.content }}')
+          img_url=$(sed 's/^.*<img src="//g;s/" referrerpolicy="no-referrer">//g' <<<'${{ on.rss.outputs.content }}')
+          echo "::set-output name=description::${description}"
+          echo "::set-output name=img_url::${img_url}"
