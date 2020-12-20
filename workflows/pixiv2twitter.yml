@@ -10,5 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Tweet
-        run: |
-          echo "Bookmarked on Pixiv: ${{ on.rss.outputs.title }} | ${{ on.rss.outputs.author }} #pixiv ${{ on.script.outputs.link }}"
+        uses: ethomson/send-tweet-action@v1
+        with:
+          status: "Bookmarked on Pixiv: ${{ on.rss.outputs.title }} | ${{ on.rss.outputs.author }} #pixiv ${{ on.script.outputs.link }}"
+          consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
+          consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
+          access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
