@@ -1,6 +1,6 @@
 on:
   rss:
-    url: https://rsshub.app/bilibili/fav/73658593/766374793
+    url: https://rsshub-dun-zeta.vercel.app/bilibili/fav/73658593/766374793
     config:
       sort:
         id: -1
