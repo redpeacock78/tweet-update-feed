@@ -1,6 +1,6 @@
 on:
   rss:
-    url: https://feed43.com/my-toggeter-favorites-item.xml
+    url: https://node2.feed43.com/my-toggeter-favorite-items.xml
 jobs:
   tweet:
     name: Tweet new favorite on Toggeter
