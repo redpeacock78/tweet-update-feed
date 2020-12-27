@@ -1,6 +1,8 @@
 on:
   rss:
     url: https://node2.feed43.com/my-toggeter-favorite-items.xml
+    config:
+      skipOnError: true
 jobs:
   tweet:
     name: Tweet new favorite on Toggeter
