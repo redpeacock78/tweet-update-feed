@@ -3,19 +3,21 @@ on:
     url: https://script.google.com/macros/s/AKfycbx-WwG_YOQd5AycMbSYOAD-43Eoi_OM0HV4-tVkJ-eq9w-52Q/exec
     config:
       skipOnError: true
+      format: |
+        item.title = item.title.replace(/&apos;/g, "'")
+          .replace(/&quot;/g, '"')
+          .replace(/&amp;/g, "&")
+          .replace(/&lt;/g, "<")
+          .replace(/&gt;/g, ">");
+        return item;
 jobs:
   tweet:
     name: Tweet Liked Videos on Youtube
     runs-on: ubuntu-latest
     steps:
-      - name: Generate text
-        id: tweet_text
-        run: |
-          fix_title=$(echo '${{ on.rss.outputs.title }}' | sed -e "s/&amp;/\&/g;s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g")
-          echo "::set-output name=title::${fix_title}"
       - uses: ethomson/send-tweet-action@v1
         with:
-          status: "Liked on YouTube: ${{ steps.tweet_text.outputs.title }} ${{ on.rss.outputs.link }}"
+          status: "Liked on YouTube: ${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
           consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
