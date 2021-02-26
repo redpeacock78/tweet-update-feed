@@ -6,6 +6,10 @@ on:
       const result = await helpers.axios.get(`https://api.rss2json.com/v1/api.json?api_key=${key}&rss_url=${rss_url}&count=20`);
       return result.data;
     deduplicationKey: link
+    config:
+      skipOnError: true
+      sort:
+        id: -1
 jobs:
   tweet:
     name: Tweet Liked Videos on Niconico
