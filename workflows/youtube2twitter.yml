@@ -3,6 +3,8 @@ on:
     url: https://script.google.com/macros/s/AKfycbx-WwG_YOQd5AycMbSYOAD-43Eoi_OM0HV4-tVkJ-eq9w-52Q/exec
     config:
       skipOnError: true
+      sort:
+        id: -1
       format: |
         item.title = item.title.replace(/&apos;/g, "'")
           .replace(/&quot;/g, '"')
