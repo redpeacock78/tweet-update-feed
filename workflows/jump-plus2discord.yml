@@ -11,6 +11,8 @@ on:
       - https://shonenjumpplus.com/rss/series/13933686331761415050
       # デビィ・ザ・コルシファは負けず嫌い
       - https://shonenjumpplus.com/rss/series/13933686331756948776
+      # その淑女は偶像となる
+      - https://shonenjumpplus.com/rss/series/13933686331775866254
 jobs:
   post:
     name: Post RSS updates to the discord
