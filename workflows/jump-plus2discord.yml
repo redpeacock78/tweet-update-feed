@@ -13,6 +13,8 @@ on:
       - https://shonenjumpplus.com/rss/series/13933686331756948776
       # その淑女は偶像となる
       - https://shonenjumpplus.com/rss/series/13933686331775866254
+      # ミュータントは人間の彼女とキスがしたい
+      - https://shonenjumpplus.com/rss/series/3269754496316031224
 jobs:
   post:
     name: Post RSS updates to the discord
