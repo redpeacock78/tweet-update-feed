@@ -20,7 +20,7 @@ jobs:
           echo "::set-output name=description::${description}"
           echo "::set-output name=img_url::${img_url}"
       - name: Post
-         run: |
+        run: |
           curl -s \
                -X POST \
                -H "Accept: application/json" \
