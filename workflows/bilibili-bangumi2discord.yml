@@ -19,7 +19,7 @@ jobs:
           img_url=$(sed 's/^.*<img src="//g;s/" referrerpolicy="no-referrer">//g' <<<'${{ on.rss.outputs.content }}')
           echo "::set-output name=description::${description}"
           echo "::set-output name=img_url::${img_url}"
-      - name: Post
+      #- name: Post
         # run: |
         #  curl -s \
         #       -X POST \
@@ -28,4 +28,3 @@ jobs:
         #       -d '{ "embeds": [{"title": "**${{ on.rss.outputs.title }}**", "description": "${{ steps.ext.outputs.description }}", "url": "${{ on.rss.outputs.link }}", "image": {"url": "${{ steps.ext.outputs.img_url }}"}}]}' \
         #       "${{ secrets.DISCORD_PRIVATE_BILIBILI_BANGUMI }}"
         #  sleep 5
-        run: echo ${{ on.rss.outputs.title }}
