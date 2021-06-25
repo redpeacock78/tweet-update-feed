@@ -51,6 +51,8 @@ jobs:
       - name: Setup act
         if: steps.runningCount.outputs.result=='1'
         uses: actionsflow/setup-act-for-actionsflow@v1
+        with:
+          version: 0.2.17
       - name: Run act
         if: steps.runningCount.outputs.result=='1'
         run: act --workflows ./dist/workflows --secret-file ./dist/.secrets --eventpath ./dist/event.json --env-file ./dist/.env -P ubuntu-latest=actionsflow/act-environment:v1 -P ubuntu-18.04=actionsflow/act-environment:v1
