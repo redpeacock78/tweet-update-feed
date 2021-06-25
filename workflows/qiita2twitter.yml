@@ -13,14 +13,14 @@ jobs:
     name: Tweet new stock on Qiita
     runs-on: ubuntu-latest
     steps:
-      - name: Text tweet
-        uses: ethomson/send-tweet-action@v1
-        with:
-          status: "${{ on.poll.outputs.title }} - Qiita をストックしました。 ${{ on.poll.outputs.url }} #Qiita"
-          consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
-          consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
-          access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+      #- name: Text tweet
+      #  uses: ethomson/send-tweet-action@v1
+      #  with:
+      #    status: "${{ on.poll.outputs.title }} - Qiita をストックしました。 ${{ on.poll.outputs.url }} #Qiita"
+      #    consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
+      #    consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
+      #    access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+      #    access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
       - name: Wait 5 second
         run: sleep 5s
         shell: bash
