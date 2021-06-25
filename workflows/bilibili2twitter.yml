@@ -9,13 +9,13 @@ jobs:
     name: Tweet Liked Videos on Bilibili
     runs-on: ubuntu-latest
     steps:
-      - uses: ethomson/send-tweet-action@v1
-        with:
-          status: "在哔哩哔哩赞过: ${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }} #bilibili #哔哩哔哩 #ビリビリ動画"
-          consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
-          consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
-          access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+      # - uses: ethomson/send-tweet-action@v1
+      #  with:
+      #    status: "在哔哩哔哩赞过: ${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }} #bilibili #哔哩哔哩 #ビリビリ動画"
+      #    consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
+      #    consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
+      #    access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+      #    access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
       - name: Wait 5 second
         run: sleep 5s
         shell: bash
