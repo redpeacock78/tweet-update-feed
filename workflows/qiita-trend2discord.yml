@@ -1,6 +1,8 @@
 on:
   rss:
     url: https://qiita.com/popular-items/feed.atom
+    config:
+      skipOnError: true
 jobs:
   post:
     name: Post RSS updates to the discord
