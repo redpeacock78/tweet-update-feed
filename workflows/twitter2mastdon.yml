@@ -51,6 +51,3 @@ jobs:
       #    method: POST
       #    content-type: application/x-www-form-urlencoded
       #    data: "access_token=${{ secrets.MASTDON_ACCESS_TOKEN }}&status=${{ steps.encode_tweet.outputs.encoded_text }}&visibility=public"
-      - name: Wait 5 second
-        run: sleep 5s
-        shell: bash
