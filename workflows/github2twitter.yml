@@ -8,14 +8,14 @@ jobs:
     name: Tweet new Starred Repos in Github
     runs-on: ubuntu-latest
     steps:
-      - name: Text tweet
-        uses: ethomson/send-tweet-action@v1
-        with:
-          status: "Starred Repos in Github: ${{ on.poll.outputs.full_name }} ${{ on.poll.outputs.html_url }}"
-          consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
-          consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
-          access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+      #- name: Text tweet
+      #  uses: ethomson/send-tweet-action@v1
+      #  with:
+      #    status: "Starred Repos in Github: ${{ on.poll.outputs.full_name }} ${{ on.poll.outputs.html_url }}"
+      #    consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
+      #    consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
+      #    access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+      #    access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
       - name: Wait 5 second
         run: sleep 5s
         shell: bash
