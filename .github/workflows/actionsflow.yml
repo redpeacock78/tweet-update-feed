@@ -37,7 +37,7 @@ jobs:
               workflow_id: "actionsflow.yml",
               status:"in_progress"
             });
-            return runed.data.total_count
+            return runed.data.total_count + 1
           result-encoding: string
       - uses: actions/checkout@v2
         if: steps.runningCount.outputs.result=='1'
