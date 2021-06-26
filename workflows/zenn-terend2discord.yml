@@ -11,15 +11,13 @@ jobs:
       - name: Fix data
         id: fix
         run: |
-          fix_date=$(date -d ${{ on.rss.outputs.pubDate }} "+%B %d, %Y at %I:%M%p")
           fix_title=$(echo "${{ on.rss.outputs.title }}" | sed -e "s/&amp;/\&/g;s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g" | sed -e 's/*/\\\\*/g;s/_/\\\\_/g;s/~~/\\\\~~/g')
-          echo "::set-output name=date::${fix_date}"
           echo "::set-output name=title::${fix_title}"
       - name: Post
         run: |
           curl -s \
                -X POST \
                -H  "Content-Type: application/json" \
-               -d '{"content": "**${{ steps.fix.outputs.title }}** - ${{ steps.fix.outputs.date }} ${{ on.rss.outputs.link }}"}' \
+               -d '{"content": "**${{ steps.fix.outputs.title }}** - ${{ on.rss.outputs.pubDate }} ${{ on.rss.outputs.link }}"}' \
                ${{ secrets.DISCORD_TECH_ZENN_ZENN_TREND }}
           sleep 5
