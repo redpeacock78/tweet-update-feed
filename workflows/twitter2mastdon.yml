@@ -45,12 +45,14 @@ jobs:
             echo "::set-output name=encoded_text::${encode_text}"
           fi
       - name: Tweet to Toot
-        uses: actionsflow/axios@v1
-        with:
-          url: https://mstdn.jp/api/v1/statuses
-          method: POST
-          content-type: application/x-www-form-urlencoded
-          data: "access_token=${{ secrets.MASTDON_ACCESS_TOKEN }}&status=${{ steps.encode_tweet.outputs.encoded_text }}&visibility=public"
-      - name: Wait 5 second
-        run: sleep 5s
         shell: bash
+        run: |
+          mastdon_host="mstdn.jp"
+          access_token="${{ secrets.MASTDON_ACCESS_TOKEN }}"
+          status="${{ steps.encode_tweet.outputs.encoded_text }}"
+          curl -X POST -Ss "https://${mastdon_host}/api/v1/statuses" \
+            --header "Authorization: Bearer ${access_token}" \
+            -d "status=${status}"
+      - name: Wait 5 second
+        shell: bash
+        run: sleep 5s
