@@ -19,6 +19,8 @@ on:
       - https://shonenjumpplus.com/rss/series/3269754496419328842
       # 殺戮の王
       - https://shonenjumpplus.com/rss/series/3269754496535710124
+      # ニューワールドオーダー
+      - https://shonenjumpplus.com/rss/series/3269632237304433100
     config:
       skipOnError: true
       sort:
