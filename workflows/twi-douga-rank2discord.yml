@@ -14,7 +14,7 @@ jobs:
       - name: Post
         run: |
           name="${{ on.rss.outputs.title }}_$(awk -F '/' '{print $NF}' <<<${{ on.rss.outputs.link }})"
-          link="$(sed 's/^.*<a href=//;s/><.*$//' <<<"${{ on.rss.outputs.content }}"|tr -d \\n)"
+          link="$(awk -F '=' '{sub("><img src","",$2);print $2}' <<<"${{ on.rss.outputs.content }}"|tr -d \\n)"
           {
             aria2c -q -x5 "${{ on.rss.outputs.link }}" -o "${name}"
             type=$(awk -F ',' '{print $1}' <<<$(file -b "./${name}"))
