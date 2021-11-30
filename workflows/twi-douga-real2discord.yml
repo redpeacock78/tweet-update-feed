@@ -1,6 +1,6 @@
 on:
   rss:
-    url: https://rss.twidouga.tk/ranking
+    url: https://rss.twidouga.tk/realtime
     config:
       sort:
         id: 1
