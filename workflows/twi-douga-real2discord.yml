@@ -11,12 +11,18 @@ jobs:
     name: Post RSS updates to the discord
     runs-on: ubuntu-latest
     steps:
+      - name: install
+        run: |
+          apt-get update >/dev/null && apt-get install -y file >/dev/null
       - name: Post
         run: |
           name="${{ on.rss.outputs.title }}_$(awk -F '/' '{print $NF}' <<<${{ on.rss.outputs.link }})"
           link="$(sed 's/^.*<a href=//;s/><.*$//' <<<"${{ on.rss.outputs.content }}"|tr -d \\n)"
           curl -s "${{ on.rss.outputs.link }}" --output "${name}"
-          curl -s \
-            -F "file1=@${name}" \
-            -F "payload_json={\"content\": \"${link}\"}" \
-            ${{ secrets.DISCORD_TWI_DOUGA_REAL }}
+          type=$(awk -F ',' '{print $1}' <<<$(file -b "./${name}"))
+          if [[ "${type}" == "ISO Media" ]]; then
+            curl -s \
+              -F "file1=@${name}" \
+              -F "payload_json={\"content\": \"${link}\"}" \
+              ${{ secrets.DISCORD_TWI_DOUGA_REAL }}
+          fi
