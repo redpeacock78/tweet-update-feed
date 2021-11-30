@@ -15,11 +15,13 @@ jobs:
         run: |
           name="${{ on.rss.outputs.title }}_$(awk -F '/' '{print $NF}' <<<${{ on.rss.outputs.link }})"
           link="$(sed 's/^.*<a href=//;s/><.*$//' <<<"${{ on.rss.outputs.content }}"|tr -d \\n)"
-          aria2c -q -x5 "${{ on.rss.outputs.link }}" -o "${name}"
-          type=$(awk -F ',' '{print $1}' <<<$(file -b "./${name}"))
-          if [[ "${type}" == "ISO Media" ]]; then
-            curl -s \
-              -F "file1=@${name}" \
-              -F "payload_json={\"content\": \"${link}\"}" \
-              ${{ secrets.DISCORD_TWI_DOUGA_REAL }}
-          fi
+          {
+            aria2c -q -x5 "${{ on.rss.outputs.link }}" -o "${name}"
+            type=$(awk -F ',' '{print $1}' <<<$(file -b "./${name}"))
+            if [[ "${type}" == "ISO Media" ]]; then
+              curl -s \
+                -F "file1=@${name}" \
+                -F "payload_json={\"content\": \"${link}\"}" \
+                ${{ secrets.DISCORD_TWI_DOUGA_REAL }}
+            fi
+          } || exit 0
