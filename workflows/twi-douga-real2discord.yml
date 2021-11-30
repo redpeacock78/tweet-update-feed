@@ -15,7 +15,7 @@ jobs:
         run: |
           name="${{ on.rss.outputs.title }}_$(awk -F '/' '{print $NF}' <<<${{ on.rss.outputs.link }})"
           link="$(sed 's/^.*<a href=//;s/><.*$//' <<<"${{ on.rss.outputs.content }}"|tr -d \\n)"
-          curl -s "${{ on.rss.outputs.link }}" --output "${name}"
+          aria2c -q -x10 "${{ on.rss.outputs.link }}" -o "${name}"
           type=$(awk -F ',' '{print $1}' <<<$(file -b "./${name}"))
           if [[ "${type}" == "ISO Media" ]]; then
             curl -s \
