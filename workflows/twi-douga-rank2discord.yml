@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Post
         run: |
-          name="${{ on.rss.outputs.title }}_$(awk -F '/' '{print $9}' <<<${{ on.rss.outputs.link }})"
+          name="${{ on.rss.outputs.title }}_$(awk -F '/' '{print $NF}' <<<${{ on.rss.outputs.link }})"
           link="$(sed 's/^.*<a href=//;s/><.*$//' <<<"${{ on.rss.outputs.content }}"|tr -d \\n)"
           curl -s "${{ on.rss.outputs.link }}" --output "${name}"
           curl -s \
