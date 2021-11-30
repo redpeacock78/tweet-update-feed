@@ -11,9 +11,6 @@ jobs:
     name: Post RSS updates to the discord
     runs-on: ubuntu-latest
     steps:
-      - name: install
-        run: |
-          apt-get update >/dev/null && apt-get install -y file >/dev/null
       - name: Post
         run: |
           name="${{ on.rss.outputs.title }}_$(awk -F '/' '{print $NF}' <<<${{ on.rss.outputs.link }})"
