@@ -6,6 +6,8 @@ on:
     branches:
       - main
   repository_dispatch:
+    types:
+      - actionsflow
   workflow_dispatch:
     inputs:
       include:
