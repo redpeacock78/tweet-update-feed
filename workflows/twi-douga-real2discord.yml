@@ -15,8 +15,8 @@ jobs:
         run: |
           name="${{ on.rss.outputs.title }}_$(awk -F '/' '{print $9}' <<<${{ on.rss.outputs.link }})"
           link="$(sed 's/^.*<a href=//;s/><.*$//' <<<"${{ on.rss.outputs.content }}"|tr -d \\n)"
-          curl "${{ on.rss.outputs.link }}" --output "${name}"
-          curl \
+          curl -s "${{ on.rss.outputs.link }}" --output "${name}"
+          curl -s \
             -F "file1=@${name}" \
             -F "payload_json={\"content\": \"${link}\"}" \
             ${{ secrets.DISCORD_TWI_DOUGA_REAL }}
