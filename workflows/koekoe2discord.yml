@@ -1,0 +1,29 @@
+on:
+  script:
+    run: |
+      const url = "https://api.koe-koe.tk/v1/female/%E3%82%8A%E3%81%8B?count=20";
+      const result = await helpers.axios.get(url);
+      result.data.items = result.data.items.reverse();
+      return result.data;
+    deduplicationKey: id
+    comfig:
+      skipOnError: true
+      sort:
+        id: 1
+
+jobs:
+  post:
+    name: Post koe-koe updates to the discord
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post
+        run: |
+          name=$(awk -F '/' '{print $6}' <<<${{ on.script.outputs.file_link }})
+          {
+            aria2c -q -x5 ${{ on.script.outputs.file_link }} -o ${name} && \
+            curl -s \
+              -F "file1=@${name}" \
+              -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.script.outputs.author }}\"}, \"description\": \"${{ on.script.outputs.description }}\", \"title\": \"${{ on.script.outputs.title }} \", \"url\": \"${{ on.script.outputs.link }})\"}]}" \
+              ${{ secrets.DISCORD_PRIVATE_KOEKOE }}
+          } || exit 0
+          sleep 1
