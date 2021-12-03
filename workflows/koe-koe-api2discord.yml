@@ -41,7 +41,7 @@ jobs:
                     -F "file1=@${name}" \
                     -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\", \"footer\": {\"text\": \"${category}\"}}]}" \
                     ${{ secrets.DISCORD_KOEKOE_FORCUS_GENERAL }}
-                elif [[ "${{ on.poll.outputs.category }}" == "forcus:female" ]]: then
+                elif [[ "${{ on.poll.outputs.category }}" == "forcus:female" ]]; then
                   curl -s \
                     -F "file1=@${name}" \
                     -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\"}]}" \
