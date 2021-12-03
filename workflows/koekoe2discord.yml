@@ -1,7 +1,7 @@
 on:
   script:
     run: |
-      const url = "https://api.koe-koe.tk/v1/female/%E3%82%8A%E3%81%8B?count=20";
+      const url = "https://api.koe-koe.tk/v1/user/female/%E3%82%8A%E3%81%8B?count=20";
       const result = await helpers.axios.get(url);
       result.data.items = result.data.items.reverse();
       return result.data;
