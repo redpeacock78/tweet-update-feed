@@ -1,0 +1,63 @@
+on:
+  poll:
+    url:
+      # 新着
+      - "https://api.koe-koe.tk/v1/newly?order=asc"
+      # 注目(総合)
+      - "https://api.koe-koe.tk/v1/forcus/general?order=asc"
+      # 注目(女性)
+      - "https://api.koe-koe.tk/v1/forcus/female?order=asc"
+      # 注目(男性)
+      - "https://api.koe-koe.tk/v1/forcus/male?order=asc"
+      # 注目(カップル)
+      - "https://api.koe-koe.tk/v1/forcus/couple?order=asc"
+    itemsPath: items
+    deduplicationKey: id
+    config:
+      skipOnError: true
+
+jobs:
+  post:
+    name: Post koe-koe-api updates to the discord
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post
+        run: |
+          name=$(awk -F '/' '{print $6}' <<<${{ on.poll.outputs.file_link }})
+          { 
+            aria2c -q -x5 ${{ on.poll.outputs.file_link }} -o ${name}
+            type=$(awk -F ',' '{print $1}' <<<$(file -b "./${name}"))
+            if [[ "${type}" =~ "Audio" ]]; then
+              if [[ "${{ on.poll.outputs.category }}" =~ "newly" ]]; then
+                category=$(awk -F ':' '{if($NF == "female"){print "女性"}else if($NF == "male"){print "男性"}else{print "カップル"}}' <<<${{ on.poll.outputs.category }})
+                curl -s \
+                  -F "file1=@${name}" \
+                  -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\", \"footer\": {\"text\": \"${category}\"}}]}" \
+                  ${{ secrets.DISCORD_KOEKOE_NEWLY }}
+              elif [[ "${{ on.poll.outputs.category }}" =~ "forcus" ]]; then
+                if [[ "${{ on.poll.outputs.category }}" =~ "forcus:general" ]]; then
+                  category=$(awk -F ':' '{if($NF == "female"){print "女性"}else if($NF == "male"){print "男性"}else{print "カップル"}}' <<<${{ on.poll.outputs.category }})
+                  curl -s \
+                    -F "file1=@${name}" \
+                    -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\", \"footer\": {\"text\": \"${category}\"}}]}" \
+                    ${{ secrets.DISCORD_KOEKOE_FORCUS_GENERAL }}
+                elif [[ "${{ on.poll.outputs.category }}" == "forcus:female" ]]: then
+                  curl -s \
+                    -F "file1=@${name}" \
+                    -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\"}]}" \
+                    ${{ secrets.DISCORD_KOEKOE_FORCUS_FEMALE }}
+                elif [[ "${{ on.poll.outputs.category }}" == "forcus:male" ]]; then
+                  curl -s \
+                    -F "file1=@${name}" \
+                    -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\"}]}" \
+                    ${{ secrets.DISCORD_KOEKOE_FORCUS_MALE }}
+                else
+                  curl -s \
+                    -F "file1=@${name}" \
+                    -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\"}]}" \
+                    ${{ secrets.DISCORD_KOEKOE_FORCUS_COUPLE }}
+                fi
+              fi
+            fi
+          } || exit 0
+          sleep 1
