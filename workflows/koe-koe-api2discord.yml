@@ -11,6 +11,12 @@ on:
       - "https://api.koe-koe.tk/v1/forcus/male?order=asc"
       # 注目(カップル)
       - "https://api.koe-koe.tk/v1/forcus/couple?order=asc"
+      # ジャンル(女性・すべて)
+      - "https://api.koe-koe.tk/v1/genre/female/all?order=asc"
+      # ジャンル(男性・すべて)
+      - "https://api.koe-koe.tk/v1/genre/male/all?order=asc"
+      # ジャンル(カップル・すべて)
+      - "https://api.koe-koe.tk/v1/genre/couple/all?order=asc"
     itemsPath: items
     deduplicationKey: id
     config:
@@ -56,6 +62,23 @@ jobs:
                     -F "file1=@${name}" \
                     -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\"}]}" \
                     ${{ secrets.DISCORD_KOEKOE_FORCUS_COUPLE }}
+                fi
+              elif [[ "${{ on.poll.outputs.category }}" =~ "genre" ]]; then
+                if [[ "${{ on.poll.outputs.category }}" =~ "female" ]]; then
+                  curl -s \
+                    -F "file1=@${name}" \
+                    -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\"}]}" \
+                    ${{ secrets.DISCORD_KOEKOE_GENRE_FEMALE }}
+                elif [[ "${{ on.poll.outputs.category }}" =~ "male" ]]; then
+                  curl -s \
+                    -F "file1=@${name}" \
+                    -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\"}]}" \
+                    ${{ secrets.DISCORD_KOEKOE_GENRE_MALE }}
+                else
+                  curl -s \
+                    -F "file1=@${name}" \
+                    -F "payload_json={\"embeds\": [{\"author\": {\"name\": \"${{ on.poll.outputs.author }}\"}, \"description\": \"${{ on.poll.outputs.description }}\", \"title\": \"${{ on.poll.outputs.title }} \", \"url\": \"${{ on.poll.outputs.link }})\"}]}" \
+                    ${{ secrets.DISCORD_KOEKOE_GENRE_COUPLE }}
                 fi
               fi
             fi
