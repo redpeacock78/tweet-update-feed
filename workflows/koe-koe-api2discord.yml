@@ -19,6 +19,7 @@ on:
       - "https://api.koe-koe.tk/v1/genre/couple/all?order=asc"
     itemsPath: items
     deduplicationKey: id
+    buildOutputsOnError: true
     config:
       skipOnError: true
 
