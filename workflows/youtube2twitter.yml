@@ -17,12 +17,12 @@ jobs:
     name: Tweet Liked Videos on Youtube
     runs-on: ubuntu-latest
     steps:
-      - uses: ethomson/send-tweet-action@v1
-        with:
-          status: "Liked on YouTube: ${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
-          consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
-          consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
-          access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+      #- uses: ethomson/send-tweet-action@v1
+      #  with:
+      #    status: "Liked on YouTube: ${{ on.rss.outputs.title }} ${{ on.rss.outputs.link }}"
+      #    consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
+      #    consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
+      #    access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+      #    access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
       - run: exit 0
         if: ${{  failure() }}
