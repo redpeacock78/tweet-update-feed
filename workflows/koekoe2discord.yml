@@ -6,6 +6,7 @@ on:
       result.data.items = result.data.items.reverse();
       return result.data;
     deduplicationKey: id
+    buildOutputsOnError: true
     comfig:
       skipOnError: true
       sort:
