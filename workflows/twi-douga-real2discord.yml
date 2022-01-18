@@ -1,6 +1,7 @@
 on:
   rss:
     url: https://rss.twidouga.tk/realtime
+    buildOutputsOnError: true
     config:
       sort:
         id: 1
