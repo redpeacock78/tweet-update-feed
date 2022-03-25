@@ -1,0 +1,26 @@
+on:
+  rss:
+    url:
+      # ぷにるはかわいいスライム
+      - https://www.corocoro.jp/rss/series/3269754496804959379
+    config:
+      skipOnError: true
+      sort:
+        id: 1
+jobs:
+  post:
+    name: Post RSS updates to the discord
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fix title
+        id: title
+        run: |
+          fix_title=$(echo "${{ on.rss.outputs.title }}" | sed "s/&amp;/\&/g;s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g" | sed 's/*/\\\\*/g;s/_/\\\\_/g;s/~~/\\\\~~/g')
+          echo "::set-output name=fix_title::${fix_title}"
+      - name: Post
+        run: |
+          curl -s \
+               -X POST \
+               -H  "Content-Type: application/json" \
+               -d '{"content": "**${{ steps.title.outputs.fix_title }}** ${{ on.rss.outputs.link }}"}' \
+               ${{ secrets.DISCORD_PRIVATE_MANGA_COROCORO_ONLINE }}
