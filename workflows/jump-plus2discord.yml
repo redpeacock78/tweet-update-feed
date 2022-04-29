@@ -25,6 +25,8 @@ on:
       - https://shonenjumpplus.com/rss/series/3269754496567812819
       # あらがえ！ダークエルフちゃん
       - https://shonenjumpplus.com/rss/series/3269754496340768651
+      # カメリアのカーテン
+      - https://shonenjumpplus.com/rss/series/3269754496895767342
     config:
       skipOnError: true
       sort:
