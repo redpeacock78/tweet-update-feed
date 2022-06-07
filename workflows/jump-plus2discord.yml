@@ -27,6 +27,8 @@ on:
       - https://shonenjumpplus.com/rss/series/3269754496340768651
       # カメリアのカーテン
       - https://shonenjumpplus.com/rss/series/3269754496895767342
+      # てるてる建設(株)
+      - https://shonenjumpplus.com/rss/series/3270296674387638314
     config:
       skipOnError: true
       sort:
