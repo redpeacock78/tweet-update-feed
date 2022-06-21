@@ -3,6 +3,8 @@ on:
     url:
       # 女騎士とケモミミの子
       - https://kuragebunch.com/rss/series/3270296674385848751
+      # 巨神姫戦記
+      - https://kuragebunch.com/rss/series/3270296674413652988
     config:
       skipOnError: true
       sort:
