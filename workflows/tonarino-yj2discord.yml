@@ -3,6 +3,10 @@ on:
     url:
       # スーサイドガール
       - https://tonarinoyj.jp/rss/series/13933686331624804843
+      # エリオと電気人形
+      - https://tonarinoyj.jp/rss/series/3270296674379186980
+      # she is beautiful
+      - https://tonarinoyj.jp/rss/series/3270296674393783191
     config:
       skipOnError: true
       sort:
