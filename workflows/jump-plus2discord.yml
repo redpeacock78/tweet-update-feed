@@ -34,7 +34,7 @@ on:
     config:
       skipOnError: true
       sort:
-        id: 1
+        link: 1
 jobs:
   post:
     name: Post RSS updates to the discord
