@@ -5,6 +5,8 @@ on:
       - https://www.sunday-webry.com/rss/series/3269754496548915362
       # 帝乃三姉妹は案外、チョロい。
       - https://www.sunday-webry.com/rss/series/3269754496643506443
+      # 山、田畑、時々レイヤーお姉さん
+      - https://www.sunday-webry.com/rss/series/3270296674429803213
     config:
       skipOnError: true
       sort:
