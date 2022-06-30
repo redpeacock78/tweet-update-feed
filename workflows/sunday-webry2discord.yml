@@ -3,6 +3,8 @@ on:
     url:
       # 任侠転生 －異世界のヤクザ姫－
       - https://www.sunday-webry.com/rss/series/3269754496548915362
+      # 帝乃三姉妹は案外、チョロい。
+      - https://www.sunday-webry.com/rss/series/3269754496643506443
     config:
       skipOnError: true
       sort:
