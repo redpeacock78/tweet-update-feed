@@ -7,6 +7,8 @@ on:
       - https://tonarinoyj.jp/rss/series/3270296674379186980
       # she is beautiful
       - https://tonarinoyj.jp/rss/series/3270296674393783191
+      # 異世界ひろゆき
+      - https://tonarinoyj.jp/rss/series/3270296674422646591
     config:
       skipOnError: true
       sort:
