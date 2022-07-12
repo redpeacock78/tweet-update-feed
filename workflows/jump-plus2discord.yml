@@ -31,6 +31,8 @@ on:
       - https://shonenjumpplus.com/rss/series/3270296674387638314
       # 正反対な君と僕
       - https://shonenjumpplus.com/rss/series/3269754496899770329
+      # チェンソーマン 第二部
+      - https://shonenjumpplus.com/rss/series/3270375685341574005
     config:
       skipOnError: true
       sort:
