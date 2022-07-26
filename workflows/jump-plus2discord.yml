@@ -33,6 +33,8 @@ on:
       - https://shonenjumpplus.com/rss/series/3269754496899770329
       # チェンソーマン 第二部
       - https://shonenjumpplus.com/rss/series/3270375685341574005
+      # 株式会社マジルミエ
+      - https://shonenjumpplus.com/rss/series/3269754496555043134
     config:
       skipOnError: true
       sort:
