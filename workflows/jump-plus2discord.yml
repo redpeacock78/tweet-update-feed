@@ -35,6 +35,8 @@ on:
       - https://shonenjumpplus.com/rss/series/3270375685341574005
       # 株式会社マジルミエ
       - https://shonenjumpplus.com/rss/series/3269754496555043134
+      # ダンダダン
+      - https://shonenjumpplus.com/rss/series/3269632237310729745
     config:
       skipOnError: true
       sort:
