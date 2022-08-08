@@ -14,13 +14,15 @@ on:
         id: 1
       format: |
         if (!item.retweeted_status) {
-          item.full_text = item.full_text.replace(/'/g, "'\\''")
+          item.full_text = item.full_text.replace(/&#39;/g, "'")
+            .replace(/'/g, "'\\''")
             .replace(/&amp;/g, "&")
             .replace(/&lt;/g, "<")
             .replace(/&gt;/g, ">");
           return item;
         } else {
-          item.retweeted_status.full_text = item.retweeted_status.full_text.replace(/'/g, "'\\''")
+          item.retweeted_status.full_text = item.retweeted_status.full_text.replace(/&#39;/g, "'")
+            .replace(/'/g, "'\\''")
             .replace(/&amp;/g, "&")
             .replace(/&lt;/g, "<")
             .replace(/&gt;/g, ">");
