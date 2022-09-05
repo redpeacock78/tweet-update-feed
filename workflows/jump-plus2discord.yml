@@ -37,6 +37,14 @@ on:
       - https://shonenjumpplus.com/rss/series/3269754496555043134
       # ダンダダン
       - https://shonenjumpplus.com/rss/series/3269632237310729745
+      # リバイアサン
+      - https://shonenjumpplus.com/rss/series/3270375685374420702
+      # マリッジトキシン
+      - https://shonenjumpplus.com/rss/series/3269754496881854342
+      # スケルトンダブル
+      - https://shonenjumpplus.com/rss/series/3270375685431753313
+      # 限界煩悩活劇オサム
+      - https://shonenjumpplus.com/rss/series/3270375685452059715
     config:
       skipOnError: true
       sort:
