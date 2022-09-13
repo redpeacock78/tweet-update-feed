@@ -16,11 +16,11 @@ jobs:
       - name: Generate text
         id: tweet_text
         env:
-          link: ${{ on.script.outputs.link }}
+          link: ${{ on.poll.outputs.link }}
         run: |
           fix_link=$(echo "${link}" | sed -e "s/?ref=rss_mylist_rss2//")
           tag=$(echo "${link}" | sed -e "s|http://www.nicovideo.jp/watch/|#|" -e "s|?ref=rss_mylist_rss2||")
-          text=$(echo "${{ on.script.outputs.title }} - ニコニコ動画 をマイリストに登録しました。 ${fix_link} ${tag} #ニコニコ動画")
+          text=$(echo "${{ on.poll.outputs.title }} - ニコニコ動画 をマイリストに登録しました。 ${fix_link} ${tag} #ニコニコ動画")
           echo "::set-output name=text::${text}"
       - name: Text tweet
         uses: ethomson/send-tweet-action@v1
