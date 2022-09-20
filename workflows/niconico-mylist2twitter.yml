@@ -2,7 +2,7 @@ on:
   poll:
     url:
       # マイリスト2
-      - https://feed2json.fly.dev/v1/feed?url=http://www.nicovideo.jp/mylist/73715852?rss=2.0
+      - https://feed2json.fly.dev/v1/feed?url=http%3A%2F%2Fwww.nicovideo.jp%2Fmylist%2F73715852%3Frss%3D2.0&count=20
     itemsPath: items
     deduplicationKey: guid
     buildOutputsOnError: true
