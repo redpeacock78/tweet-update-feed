@@ -45,6 +45,8 @@ on:
       - https://shonenjumpplus.com/rss/series/3270375685431753313
       # 限界煩悩活劇オサム
       - https://shonenjumpplus.com/rss/series/3270375685452059715
+      # 幼稚園WARS
+      - https://shonenjumpplus.com/rss/series/316112896822068170
     config:
       skipOnError: true
       sort:
