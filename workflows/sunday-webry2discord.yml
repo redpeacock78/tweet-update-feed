@@ -7,6 +7,8 @@ on:
       - https://www.sunday-webry.com/rss/series/3269754496643506443
       # 山、田畑、時々レイヤーお姉さん
       - https://www.sunday-webry.com/rss/series/3270296674429803213
+      # ビグネス参式
+      - https://www.sunday-webry.com/rss/series/316112896879893493
     config:
       skipOnError: true
       sort:
