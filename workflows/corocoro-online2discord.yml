@@ -3,6 +3,8 @@ on:
     url:
       # ぷにるはかわいいスライム
       - https://www.corocoro.jp/rss/series/3269754496804959379
+      # 炎の闘球女 ドッジ弾子
+      - https://www.corocoro.jp/rss/series/316112896942926970
     config:
       skipOnError: true
       sort:
