@@ -9,6 +9,8 @@ on:
       - https://www.sunday-webry.com/rss/series/3270296674429803213
       # ビグネス参式
       - https://www.sunday-webry.com/rss/series/316112896879893493
+      # GOLDEN SPIRAL
+      - https://www.sunday-webry.com/rss/series/3269754496856683106
     config:
       skipOnError: true
       sort:
