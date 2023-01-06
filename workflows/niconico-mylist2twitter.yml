@@ -15,11 +15,9 @@ jobs:
     steps:
       - name: Generate text
         id: tweet_text
-        env:
-          link: ${{ on.poll.outputs.link }}
         run: |
-          fix_link=$(echo "${link}" | sed -e "s/?ref=rss_mylist_rss2//" | sed -e "s/www.nicovideo.jp/nicovi.deno.dev/g")
-          tag=$(echo "${link}" | sed -e "s|http://www.nicovideo.jp/watch/|#|" -e "s|?ref=rss_mylist_rss2||")
+          fix_link=$(echo "${{ on.poll.outputs.link }}" | sed -e "s/?ref=rss_mylist_rss2//" | sed -e "s/www.nicovideo.jp/nicovi.deno.dev/g")
+          tag=$(echo "${{ on.poll.outputs.link }}" | sed -e "s|http://www.nicovideo.jp/watch/|#|" -e "s|?ref=rss_mylist_rss2||")
           text=$(echo "${{ on.poll.outputs.title }} - ニコニコ動画 をマイリストに登録しました。 ${fix_link} ${tag} #ニコニコ動画")
           echo "::set-output name=text::${text}"
       - name: Text tweet
