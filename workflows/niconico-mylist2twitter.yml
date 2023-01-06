@@ -2,7 +2,7 @@ on:
   poll:
     url:
       # マイリスト2
-      - https://feed2json.fly.dev/v1/feed?url=http%3A%2F%2Fwww.nicovideo.jp%2Fmylist%2F73715852%3Frss%3D2.0&count=20
+      - https://feed2json-prod-feed2json-mujb18.mo6.mogenius.io/v1/feed?url=https://www.nicovideo.jp/mylist/73715852?rss=2.0
     itemsPath: items
     deduplicationKey: guid
     buildOutputsOnError: true
@@ -18,7 +18,7 @@ jobs:
         env:
           link: ${{ on.poll.outputs.link }}
         run: |
-          fix_link=$(echo "${link}" | sed -e "s/?ref=rss_mylist_rss2//")
+          fix_link=$(echo "${link}" | sed -e "s/?ref=rss_mylist_rss2//" | sed -e "s/www.nicovideo.jp/nicovi.deno.dev/g")
           tag=$(echo "${link}" | sed -e "s|http://www.nicovideo.jp/watch/|#|" -e "s|?ref=rss_mylist_rss2||")
           text=$(echo "${{ on.poll.outputs.title }} - ニコニコ動画 をマイリストに登録しました。 ${fix_link} ${tag} #ニコニコ動画")
           echo "::set-output name=text::${text}"
