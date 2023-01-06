@@ -3,6 +3,8 @@ on:
     url: https://api.github.com/users/redpeacock78/starred?page=1&per_page=20
     requestConfig:
       method: GET
+    config:
+      skipOnError: true
 jobs:
   tweet:
     name: Tweet new Starred Repos in Github
