@@ -2,6 +2,7 @@ on:
   rss:
     url: https://rsshub-dun-zeta.vercel.app/bilibili/fav/73658593/766374793
     config:
+      skipOnError: true
       sort:
         id: -1
 jobs:
