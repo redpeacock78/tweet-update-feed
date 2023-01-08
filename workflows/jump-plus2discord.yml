@@ -47,6 +47,8 @@ on:
       - https://shonenjumpplus.com/rss/series/3270375685452059715
       # 幼稚園WARS
       - https://shonenjumpplus.com/rss/series/316112896822068170
+      # 放課後ひみつクラブ
+      - https://shonenjumpplus.com/rss/series/316112896928922793
     config:
       skipOnError: true
       sort:
