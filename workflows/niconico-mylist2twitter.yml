@@ -2,7 +2,7 @@ on:
   poll:
     url:
       # マイリスト2
-      - https://feed2json-prod-feed2json-mujb18.mo6.mogenius.io/v1/feed?url=https://www.nicovideo.jp/mylist/73715852?rss=2.0
+      - https://feed2json.redpeacock78.com/v1/feed?url=https://www.nicovideo.jp/mylist/73715852?rss=2.0&count=20
     itemsPath: items
     deduplicationKey: guid
     buildOutputsOnError: true
