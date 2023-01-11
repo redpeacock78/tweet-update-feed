@@ -49,6 +49,8 @@ on:
       - https://shonenjumpplus.com/rss/series/316112896822068170
       # 放課後ひみつクラブ
       - https://shonenjumpplus.com/rss/series/316112896928922793
+      # エクソシストを堕とせない
+      - https://shonenjumpplus.com/rss/series/3269754496649675670
     config:
       skipOnError: true
       sort:
