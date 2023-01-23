@@ -5,6 +5,8 @@ on:
       - https://comic-days.com/rss/series/316112896848726067
       # 月とライカと吸血姫
       - https://comic-days.com/rss/series/13932016480030116358
+      # ボールパークでつかまえて！
+      - https://comic-days.com/rss/series/13933686331699120477
     config:
       skipOnError: true
       sort:
