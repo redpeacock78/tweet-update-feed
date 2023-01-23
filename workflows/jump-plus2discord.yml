@@ -53,6 +53,8 @@ on:
       - https://shonenjumpplus.com/rss/series/3269754496649675670
       # ハイパーインフレーション
       - https://shonenjumpplus.com/rss/series/13933686331749163166
+      # キョンシーX
+      - https://shonenjumpplus.com/rss/series/316190247112826446
     config:
       skipOnError: true
       sort:
