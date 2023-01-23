@@ -3,6 +3,8 @@ on:
     url:
       # ドランク・インベーダー
       - https://comic-days.com/rss/series/316112896848726067
+      # 月とライカと吸血姫
+      - https://comic-days.com/rss/series/13932016480030116358
     config:
       skipOnError: true
       sort:
