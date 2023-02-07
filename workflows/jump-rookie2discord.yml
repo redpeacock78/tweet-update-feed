@@ -1,0 +1,28 @@
+on:
+  poll:
+    url:
+      # 天地ミッション
+      - "https://api.tamakasu.ga/v1/rookie-shonenjump/series/pGBIkZlU81E"
+    itemsPath: items
+    deduplicationKey: id
+    buildOutputsOnError: true
+    config:
+      skipOnError: true
+
+jobs:
+  post:
+    name: Post jump-rookie updates to the discord
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fix title
+        id: title
+        run: |
+          fix_title=$(echo "${{ on.poll.outputs.title }}" | sed "s/&amp;/\&/g;s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apos;/'/g" | sed 's/*/\\\\*/g;s/_/\\\\_/g;s/~~/\\\\~~/g')
+          echo "::set-output name=fix_title::${fix_title}"
+      - name: Post
+        run: |
+          curl -s \
+               -X POST \
+               -H  "Content-Type: application/json" \
+               -d '{"content": "**${{ steps.title.outputs.fix_title }}** ${{ on.poll.outputs.contentUrl }}"}' \
+               ${{ secrets.DISCORD_PRIVATE_MANGA_JUMP_ROOKIE }}
