@@ -2,9 +2,9 @@ on:
   poll:
     url:
       # 天地ミッション
-      - "https://api.tamakasu.ga/v1/rookie-shonenjump/series/pGBIkZlU81E"
+      - "https://api.redpeacock78.ml/v1/rookie-shonenjump/series/pGBIkZlU81E"
       # 【自主製作】月歌の始まり
-      - "https://api.tamakasu.ga/v1/rookie-shonenjump/series/X1vJnKYxrGw"
+      - "https://api.redpeacock78.ml/v1/rookie-shonenjump/series/X1vJnKYxrGw"
     itemsPath: items
     deduplicationKey: id
     buildOutputsOnError: true
