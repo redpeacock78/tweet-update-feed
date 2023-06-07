@@ -5,6 +5,8 @@ on:
       - "https://api.redpeacock78.ml/v1/rookie-shonenjump/series/pGBIkZlU81E"
       # 【自主製作】月歌の始まり
       - "https://api.redpeacock78.ml/v1/rookie-shonenjump/series/X1vJnKYxrGw"
+      # 魔法少女　翔
+      - "https://api.redpeacock78.ml/v1/rookie-shonenjump/series/X1vJnKZQ7xE"
     itemsPath: items
     deduplicationKey: id
     buildOutputsOnError: true
